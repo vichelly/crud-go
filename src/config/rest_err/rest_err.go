@@ -47,3 +47,44 @@ func NewInternalServerError(message string) *RestErr {
 		Code:    http.StatusInternalServerError,
 	}
 }
+
+func NewNotFoundError(message string) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "not_found",
+		Code:    http.StatusNotFound,
+	}
+}
+
+func NewUnauthorizedError(message string) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "unauthorized",
+		Code:    http.StatusUnauthorized,
+	}
+}
+
+func NewForbiddenError(message string) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "forbidden",
+		Code:    http.StatusForbidden,
+	}
+}
+
+func NewConflictError(message string) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "conflict",
+		Code:    http.StatusConflict,
+	}
+}
+
+func NewUnprocessableEntityError(message string, causes []Causes) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "unprocessable_entity",
+		Code:    http.StatusUnprocessableEntity,
+		Causes:  causes,
+	}
+}
