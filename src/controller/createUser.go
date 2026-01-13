@@ -1,5 +1,23 @@
 package controller
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
 
-func CreateUser(c *gin.Context) {}
+	"github.com/gin-gonic/gin"
+	"github.com/vichelly/crud-go/src/config/rest_err"
+	"github.com/vichelly/crud-go/src/controller/model/request"
+)
+
+func CreateUser(c *gin.Context) {
+
+	var userRequest request.UserRequest
+
+	if err := c.ShouldBindJSON(&userRequest); err != nil {
+		restErr := rest_err.NewBadRequestError(
+			fmt.Sprintf("Incorrect fields, error=%s\n", err),
+		)
+		c.JSON(restErr.Code, restErr.Message)
+		return
+	}
+	fmt.Println(userRequest)
+}
