@@ -14,7 +14,7 @@ func CreateUser(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&userRequest); err != nil {
 		restErr := validation.ValidateUserError(err)
-		c.JSON(restErr.Code, restErr.Message)
+		c.JSON(restErr.Code, restErr)
 		return
 	}
 	fmt.Println(userRequest)
